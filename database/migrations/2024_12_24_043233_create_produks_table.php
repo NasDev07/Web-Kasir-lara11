@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('produks', function (Blueprint $table) {
             $table->id();
+            $table->string('kode');
+            $table->string('nama');
+            $table->integer('harga')->unsigned();
+            $table->integer('stok')->default(1)->unsigned();
             $table->timestamps();
         });
     }
