@@ -11,6 +11,10 @@
                     class="btn {{ $pilihanMenu == 'tambah' ? 'btn-primary' : 'btn-outline-primary' }}">
                     Tambah Produk
                 </button>
+                <button wire:click="pilihMenu('excel')"
+                    class="btn {{ $pilihanMenu == 'excel' ? 'btn-primary' : 'btn-outline-primary' }}">
+                    Import Produk
+                </button>
                 <button wire:loading class="btn btn-info">
                     Loading...
                 </button>
@@ -114,27 +118,23 @@
                                 @enderror
 
                                 <br>
-                                <label for="">Email</label>
-                                <input type="email" class="form-control" wire:model="email" />
-                                @error('email')
+                                <label for="">Kode / Barcode</label>
+                                <input type="text" class="form-control" wire:model="kode" />
+                                @error('kode')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
 
                                 <br>
-                                <label for="">Password</label>
-                                <input type="password" class="form-control" wire:model="password" />
-                                @error('password')
+                                <label for="">Harga</label>
+                                <input type="number" class="form-control" wire:model="harga" />
+                                @error('harga')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
 
                                 <br>
-                                <label for="">Peran</label>
-                                <select class="form-control" wire:model="peran">
-                                    <option value="">--Pilih Peran--</option>
-                                    <option value="kasir">Kasir</option>
-                                    <option value="admin">Admin</option>
-                                </select>
-                                @error('peran')
+                                <label for="">Stok</label>
+                                <input type="text" class="form-control" wire:model="stok" />
+                                @error('stok')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
 
@@ -152,9 +152,23 @@
                         </div>
                         <div class="card-body">
                             Anda yakin akan menghapus Produk ini?
+                            <p>Kode : {{ $produkTerpilih->kode }}</p>
                             <p>Nama : {{ $produkTerpilih->nama }}</p>
                             <button class="btn btn-danger" wire:click="hapus">Hapus</button>
                             <button class="btn btn-secondary" wire:click="batal">Batal</button>
+                        </div>
+                    </div>
+
+                @elseif($pilihanMenu == 'excel')
+                    <div class="card border-primary">
+                        <div class="card-header bg-primary text-white">
+                            Import Produk
+                        </div>
+                        <div class="card-body">
+                            <form wire:submit='importExcel'>
+                                <input type="file" class="form-control" wire:model="fileExcel">
+                                <button class="btn btn-primary mt-3" type="submit">Kirim</button>
+                            </form>
                         </div>
                     </div>
 
